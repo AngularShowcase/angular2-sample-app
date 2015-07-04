@@ -7,9 +7,8 @@ export {IUser}
 export class UsersService {
   private loaded = false;
   private loading = false;
-  private xhr: any;
   usersCache: Array<IUser>;
-  selectedUser: any;
+  selectedUser: IUser;
 
   constructor(@Inject(Http) private http: Http) {
     this.usersCache = [];
@@ -20,7 +19,7 @@ export class UsersService {
       return this.usersCache;
     } else {
       this.loading = true;
-      this.xhr = this.http.get('http://api.randomuser.me/?results=10')
+      this.http.get('http://api.randomuser.me/?results=10')
         .toRx()
         .map(res => res.json().results)
         .map(res => res.map(o => o.user))
@@ -34,7 +33,7 @@ export class UsersService {
     }
   }
 
-  selectUser(user: IUser) {
+  setSelectedUser(user: IUser) {
     this.selectedUser = user;
   }
 

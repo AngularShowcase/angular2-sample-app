@@ -16,6 +16,6 @@ export class UsersList {
   constructor(private usersService: UsersService) {}
 
   select(user) {
-    this.usersService.selectUser(user);
+    this.usersService.setSelectedUser(user);
   }
 }
