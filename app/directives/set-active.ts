@@ -2,9 +2,11 @@ import {Directive, ElementRef} from 'angular2/angular2';
 
 /**
  * Simple directive to add class active on a LI element when
- * it's A child element is clicked. Active class is removed
- * form all other LI element.
+ * its A child element is clicked. Active class is removed
+ * from all other LI element.
  * Follow the same principle as nav's in Bootstrap.
+ *
+ * TODO: Add onload set-active (childs routes nned to work correctly for that).
  *
  * @Example:
  * 	<ul set-active>
