@@ -6,7 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Minko Gechev <mgechev>",
+  "keywords": [
+    "angular2-seed",
+    "angular2",
+    "typescript",
+    "systemjs",
+    "gulp"
+  ],
+  "author": "Ludovic Henin <ludohenin>",
   "license": "MIT",
   "devDependencies": {
     "del": "^1.1.1",
