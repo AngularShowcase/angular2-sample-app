@@ -1,4 +1,4 @@
-<ul class="users-list">
+<ul class="users-list" set-active>
   <li *ng-for="#user of users">
     <!-- Component loading works but browser Location is not updated -->
     <img src="{{ user.picture.medium }}" alt="{{ user.username }} is picture" />
