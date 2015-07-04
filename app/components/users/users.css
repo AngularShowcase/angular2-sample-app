@@ -1,0 +1,23 @@
+users,
+users-list,
+users-home,
+user-details { display: block; }
+
+ul.users-list {
+  margin: 0;
+  padding: 0;
+  display: block;
+  width: 300px;
+  float: left;
+}
+.users-list > li {
+  list-style: none;
+}
+.users-list > li > img {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  margin: 0 5px 0 5px;
+}
+
+.user-details {}

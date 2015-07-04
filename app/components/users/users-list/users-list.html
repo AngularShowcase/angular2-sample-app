@@ -1,0 +1,8 @@
+<ul class="users-list">
+  <li *ng-for="#user of users">
+    <!-- Component loading works but browser Location is not updated -->
+    <img src="{{ user.picture.medium }}" alt="{{ user.username }} is picture" />
+    <a [router-link]="['./user-details', { username: user.username }]"
+       (click)="select(user)">{{ user.name.last }}, {{ user.name.first }}</a>
+  </li>
+</ul>
