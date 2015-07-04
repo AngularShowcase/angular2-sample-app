@@ -4,15 +4,6 @@ import {Router, routerDirectives} from 'angular2/router';
 import {UsersService} from '../services/users-service';
 import {SetActive} from '../../../directives/set-active';
 
-@Directive({
-  selector: '[test]'
-})
-class TestDirective {
-  constructor(el: ElementRef) {
-    console.log(el);
-  }
-}
-
 @Component({
   selector: 'users-list',
   properties: ['users']
