@@ -20,11 +20,13 @@ import {Directive, ElementRef} from 'angular2/angular2';
  */
 @Directive({
   selector: '[set-active]',
-  host: { '(^click)': 'setActive($event)' }
+  host: { '(^click)': 'setActive($event)' },
+  properties: ['mode: set-active']
 })
 export class SetActive {
   nativeElement: HTMLLIElement;
   parent: HTMLUListElement;
+  mode: string
   constructor(private element: ElementRef) {
     this.nativeElement = this.element.nativeElement;
     if (this.nativeElement.tagName !== 'LI') {
@@ -32,6 +34,11 @@ export class SetActive {
                       applied on LI element`);
     }
     this.parent = <HTMLUListElement>this.nativeElement.parentNode;
+
+    // Will be used to check A element href attribute against browser
+    // location strictly or partially. Default to strict.
+    // To be implemented.
+    this.mode = this.mode || 'strict';
 
     // Reset as the view seems to be cached. Class active is still here
     // even after a re-instanciation of the component using this directive.

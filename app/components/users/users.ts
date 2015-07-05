@@ -6,20 +6,9 @@ import {Router, RouteConfig, routerDirectives, RouteParams} from 'angular2/route
 import {Http} from 'angular2/http';
 
 import {UsersList} from './users-list/users-list';
+import {UsersHome} from './users-home/user-home';
 import {UserDetails} from './user-details/user-details';
 import {UsersService} from './services/users-service';
-
-// -----------------------------------------------------------------
-@Component({
-  selector: 'users-home'
-})
-@View({
-  template: '<h1>Users Home</h1>'
-})
-class UsersHome {}
-// -----------------------------------------------------------------
-
-
 
 @Component({
   selector: 'users'
