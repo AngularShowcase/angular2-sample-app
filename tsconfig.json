@@ -17,7 +17,7 @@
         "./app/components/users/services/interfaces.ts",
         "./app/components/users/services/users-service.ts",
         "./app/components/users/user-details/user-details.ts",
-        "./app/components/users/users-home/user-home.ts",
+        "./app/components/users/users-home/users-home.ts",
         "./app/components/users/users-list/users-list.ts",
         "./app/components/users/users.ts",
         "./app/directives/set-active.ts",
