@@ -5,8 +5,6 @@ import {IUser} from './interfaces';
 export {IUser}
 
 export class UsersService {
-  private loaded = false;
-  private loading = false;
   private loadUsers: Promise<Array<IUser>>;
   usersCache: Array<IUser>;
   selectedUser: IUser;
@@ -14,27 +12,17 @@ export class UsersService {
   constructor(@Inject(Http) private http: Http) {
     this.usersCache = [];
     this.loadUsers = new Promise((resolve, reject) => {
-      this.http.get('./components/users/services/data.json')
+      this.http.get('http://api.randomuser.me/?results=10&seed=885ad8c4404e07ea03')
         .toRx()
         .map(res => res.json().results)
         .map(res => res.map(o => o.user))
         .subscribe(res => {
           res.forEach(user => this.usersCache.push(user));
-          /*this.loaded = true;
-          this.loading = false;*/
           resolve(this.usersCache);
         });
     });
   }
   getUsers(): Promise<Array<IUser>> {
-    /*if (this.loaded || this.loading) {
-      return this.usersCache;
-    } else {
-      this.loading = true;
-      // this.http.get('http://api.randomuser.me/?results=10')
-
-      return this.usersCache;
-    }*/
     return this.loadUsers;
   }
   getUser(username): Promise<IUser> {
@@ -47,7 +35,7 @@ export class UsersService {
   setSelectedUser(user: IUser): void {
     this.selectedUser = user;
   }
-  getSelectedUser(username: string): IUser {
+  getSelectedUser(): IUser {
     return this.selectedUser;
   }
   private findUserByUsername(username): Promise<IUser> {
