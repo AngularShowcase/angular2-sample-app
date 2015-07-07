@@ -1,9 +1,10 @@
+export {UsersService, IUser} from './services/users-service';
 export {UsersList} from './users-list/users-list';
-export {UsersService} from './services/users-service';
+export {UsersHome} from './users-home/users-home';
+export {UserDetails} from './user-details/user-details';
 
-import {Component, View, NgFor, Inject, Parent} from 'angular2/angular2';
-import {Router, RouteConfig, routerDirectives, RouteParams} from 'angular2/router';
-import {Http} from 'angular2/http';
+import {Component, View, NgIf} from 'angular2/angular2';
+import {RouteConfig, routerDirectives} from 'angular2/router';
 
 import {UsersList} from './users-list/users-list';
 import {UsersHome} from './users-home/users-home';
@@ -21,13 +22,28 @@ import {UsersService} from './services/users-service';
 @View({
   templateUrl: './components/users/users.html?v=<%= VERSION %>',
   styleUrls: ['./components/users/users.css'],
-  directives: [NgFor, routerDirectives, UsersList]
+  directives: [routerDirectives, NgIf, UsersList]
 })
 export class Users {
   users: Array<any>;
+  loading = true;
   constructor(private usersService: UsersService) {
     usersService
       .getUsers()
-      .then(users => this.users = users);
+      .then(users => {
+        this.users = users;
+        // To be removed when component activation will work.
+        this.loading = false;
+      });
+  }
+  // --------------------------------
+  // Not supported by ng2 router yet.
+  canActivate() {
+    this.loading = true;
+    this.usersService.getUsers();
+  }
+  activate() {
+    console.info('Component router activation works now !');
+    this.loading = false;
   }
 }

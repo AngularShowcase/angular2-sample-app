@@ -23,9 +23,8 @@ export class UserDetails {
         .then(user => this.user = user);
     }
   }
-  // Not supported by ng2 router yet.
+
   canActivate() {
-    console.info('Component router activation works now !');
     return this.usersService.getUsers();
   }
 }

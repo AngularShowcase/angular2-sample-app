@@ -1,26 +1,16 @@
-import {Inject, EventEmitter} from 'angular2/angular2';
+export {IUser} from './interfaces';
+
+import {Inject} from 'angular2/angular2';
 import {Http} from 'angular2/http';
+
 import {IUser} from './interfaces';
 
-export {IUser}
-
 export class UsersService {
-  private loadUsers: Promise<Array<IUser>>;
+  private loadUsers = new Promise(this.lodaingPromise.bind(this));
   usersCache: Array<IUser>;
   selectedUser: IUser;
-
   constructor(@Inject(Http) private http: Http) {
     this.usersCache = [];
-    this.loadUsers = new Promise((resolve, reject) => {
-      this.http.get('http://api.randomuser.me/?results=10&seed=885ad8c4404e07ea03')
-        .toRx()
-        .map(res => res.json().results)
-        .map(res => res.map(o => o.user))
-        .subscribe(res => {
-          res.forEach(user => this.usersCache.push(user));
-          resolve(this.usersCache);
-        });
-    });
   }
   getUsers(): Promise<Array<IUser>> {
     return this.loadUsers;
@@ -32,11 +22,15 @@ export class UsersService {
         return this.selectedUser;
       });
   }
-  setSelectedUser(user: IUser): void {
-    this.selectedUser = user;
-  }
-  getSelectedUser(): IUser {
-    return this.selectedUser;
+  private lodaingPromise(resolve, reject): void {
+    this.http.get('http://api.randomuser.me/?results=10&seed=885ad8c4404e07ea03')
+      .toRx()
+      .map(res => res.json().results)
+      .map(res => res.map(o => o.user))
+      .subscribe(res => {
+        res.forEach(user => this.usersCache.push(user));
+        resolve(this.usersCache);
+      });
   }
   private findUserByUsername(username): Promise<IUser> {
     /*return this.usersCache.filter(user => user.username === username)[0];*/

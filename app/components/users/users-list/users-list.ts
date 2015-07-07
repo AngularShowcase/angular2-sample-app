@@ -1,7 +1,6 @@
-import {Component, View, Inject, NgFor, Directive, ElementRef} from 'angular2/angular2';
-import {Router, routerDirectives} from 'angular2/router';
+import {Component, View, NgFor} from 'angular2/angular2';
+import {RouterLink} from 'angular2/router';
 
-import {UsersService} from '../services/users-service';
 import {SetActive} from '../../../directives/set-active';
 
 @Component({
@@ -10,13 +9,6 @@ import {SetActive} from '../../../directives/set-active';
 })
 @View({
   templateUrl: './components/users/users-list/users-list.html?v=<%= VERSION %>',
-  styles: ['user-details { display: block; }'],
-  directives: [NgFor, routerDirectives, SetActive]
+  directives: [RouterLink, NgFor, SetActive]
 })
-export class UsersList {
-  constructor(private usersService: UsersService) {}
-
-  select(user) {
-    this.usersService.setSelectedUser(user);
-  }
-}
+export class UsersList {}

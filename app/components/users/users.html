@@ -1,5 +1,9 @@
 <h1>Users</h1>
 
-<users-list [users]="users"></users-list>
+<div *ng-if="loading">Loading users data</div>
 
-<router-outlet></router-outlet>
+<div *ng-if="!loading">
+  <users-list [users]="users"></users-list>
+
+  <router-outlet></router-outlet>
+</div>
