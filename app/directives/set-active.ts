@@ -1,12 +1,11 @@
-import {Directive, ElementRef} from 'angular2/angular2';
+import {Directive, ElementRef, Inject} from 'angular2/angular2';
+import {Router} from 'angular2/router';
 
 /**
  * Simple directive to add class active on a LI element when
  * its A child element is clicked. Active class is removed
  * from all other LI element.
  * Follow the same principle as nav's in Bootstrap.
- *
- * TODO: Add onload set-active (childs routes need to fully work for that).
  *
  * @Example:
  * 	<ul>
@@ -20,35 +19,40 @@ import {Directive, ElementRef} from 'angular2/angular2';
  */
 @Directive({
   selector: '[set-active]',
-  host: { '(^click)': 'setActive($event)' },
-  properties: ['mode: set-active']
+  host: { '(^click)': 'setActive($event)' }
 })
 export class SetActive {
   nativeElement: HTMLLIElement;
   parent: HTMLUListElement;
   mode: string
-  constructor(private element: ElementRef) {
+  constructor(private element: ElementRef, @Inject(Router) private router) {
     this.nativeElement = this.element.nativeElement;
     if (this.nativeElement.tagName !== 'LI') {
-      throw new Error(`This directive only supports UL > LI list and must
+      throw new Error(`This directive only supports UL > LI list and must be
                       applied on LI element`);
     }
     this.parent = <HTMLUListElement>this.nativeElement.parentNode;
 
-    // Will be used to check A element href attribute against browser
-    // location strictly or partially. Default to strict.
-    // To be implemented.
-    this.mode = this.mode || 'strict';
-
     // Reset as the view seems to be cached. Class active is still here
     // even after a re-instanciation of the component using this directive.
     this.removeActiveClass();
+
+    this.onLoadSetActive();
   }
   setActive(evt): void {
     if (evt.target.tagName === 'A') {
       this.removeActiveClass();
       this.addActiveClass();
     }
+  }
+  onLoadSetActive() {
+    // This is executed before the NgFor hence the timeout.
+    // TODO: see if there is a better way.
+    setTimeout(() => {
+      let route = this.router._currentInstruction.capturedUrl;
+      let href = this.getHrefAttribute();
+      if (route.match(href)) { this.addActiveClass(); }
+    }, 0);
   }
   private removeActiveClass(): void {
     let elements = this.parent.getElementsByClassName('active');
@@ -58,5 +62,10 @@ export class SetActive {
   }
   private addActiveClass(): void {
     this.nativeElement.classList.add('active');
+  }
+  private getHrefAttribute() {
+    let anchorElement = <HTMLAnchorElement>this.nativeElement
+      .getElementsByTagName('A')[0];
+    return anchorElement.getAttribute('href');
   }
 }
