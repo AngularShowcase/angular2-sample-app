@@ -23,8 +23,4 @@ export class UserDetails {
         .then(user => this.user = user);
     }
   }
-
-  canActivate() {
-    return this.usersService.getUsers();
-  }
 }
