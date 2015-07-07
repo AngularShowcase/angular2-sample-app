@@ -7,7 +7,7 @@ ul.users-list {
   margin: 0;
   padding: 0;
   display: block;
-  width: 300px;
+  width: 280px;
   float: left;
 }
 .users-list > li {
@@ -16,11 +16,25 @@ ul.users-list {
 .users-list > li.active {
   background-color: #cecece;
 }
-.users-list > li > img {
+.users-list > li > a {
+  display: block;
+  text-decoration: none;
+  padding: 3px 0;
+  color: dimgray;
+}
+.users-list > li > a:hover {
+  background-color: slategray;
+  color: floralwhite;
+}
+.users-list > li > a > img {
   width: 50px;
   height: 50px;
   border-radius: 25px;
   margin: 0 5px 0 5px;
+  vertical-align: middle;
 }
 
-.user-details {}
+.user-details {
+  margin-left: 280px;
+  padding: 0 15px;
+}
