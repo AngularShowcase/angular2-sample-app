@@ -26,7 +26,8 @@ import {UsersService} from './services/users-service';
 export class Users {
   users: Array<any>;
   constructor(private usersService: UsersService) {
-    this.users = usersService
-      .getAll();
+    usersService
+      .getUsers()
+      .then(users => this.users = users);
   }
 }
