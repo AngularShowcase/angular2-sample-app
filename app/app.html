@@ -2,7 +2,7 @@
   <nav>
     <a [router-link]="['/home']">Home</a>
     <a [router-link]="['/about']">About</a>
-    <a href="#" (click)="navigate('/users/home')">User</a>
+    <a [router-link]="['/users', 'users-home']">User</a>
   </nav>
 
   <router-outlet></router-outlet>

@@ -1,6 +1,6 @@
 /// <reference path="../typings/tsd.d.ts" />
-import {Component, View, bootstrap, NgFor, Inject} from 'angular2/angular2';
-import {Router, RouteConfig, routerDirectives, routerInjectables} from 'angular2/router';
+import {Component, View, bootstrap} from 'angular2/angular2';
+import {RouteConfig, routerDirectives, routerInjectables} from 'angular2/router';
 import {httpInjectables} from 'angular2/http';
 
 import {Home} from './components/home/home';
@@ -23,16 +23,7 @@ import {Users, UsersService} from './components/users/users';
   styles: ['app { display: block }'],
   directives: [routerDirectives]
 })
-class App {
-  constructor(@Inject(Router) private router) {}
-
-  // Navigate child routes until router-link works for
-  // child router in parent component.
-  navigate(route) {
-    this.router.navigate(route);
-    return false;
-  }
-}
+class App {}
 
 
 bootstrap(App, [routerInjectables, httpInjectables]);

@@ -49,7 +49,7 @@ export class SetActive {
     // This is executed before the NgFor hence the timeout.
     // TODO: see if there is a better way.
     setTimeout(() => {
-      let route = this.router._currentInstruction.capturedUrl;
+      let route = this.router.parent._currentInstruction.accumulatedUrl;
       let href = this.getHrefAttribute();
       if (route.match(href)) { this.addActiveClass(); }
     }, 0);

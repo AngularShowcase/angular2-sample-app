@@ -13,7 +13,7 @@ Sample application based upon [mgechev](https://github.com/mgechev)/ [angular2-s
 * Router module (implementing child routes*)
 * Http module
 
-*Child routes issue: component gets loaded but browser location does not update*
+~~*Child routes issue: component gets loaded but browser location does not update*~~
 
 # How to start
 

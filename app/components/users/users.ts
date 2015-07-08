@@ -15,7 +15,7 @@ import {UsersService} from './services/users-service';
   selector: 'users'
 })
 @RouteConfig([
-  // { path: '/', redirectTo: '/home' },
+  { path: '/', redirectTo: '/home' },
   { path: '/home', component: UsersHome, as: 'users-home' },
   { path: '/name/:username', component: UserDetails, as: 'user-details' }
 ])
