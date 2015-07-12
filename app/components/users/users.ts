@@ -11,18 +11,20 @@ import {UsersHome} from './users-home/users-home';
 import {UserDetails} from './user-details/user-details';
 import {UsersService} from './services/users-service';
 
+import {LoadingButton} from '../../directives/loading-button';
+
 @Component({
   selector: 'users'
 })
 @RouteConfig([
   { path: '/', redirectTo: '/home' },
   { path: '/home', component: UsersHome, as: 'users-home' },
-  { path: '/name/:username', component: UserDetails, as: 'user-details' }
+  { path: '/show/:username', component: UserDetails, as: 'user-details' }
 ])
 @View({
   templateUrl: './components/users/users.html?v=<%= VERSION %>',
   styleUrls: ['./components/users/users.css'],
-  directives: [routerDirectives, NgIf, UsersList]
+  directives: [routerDirectives, NgIf, UsersList, LoadingButton]
 })
 export class Users {
   users: Array<any>;
@@ -35,6 +37,9 @@ export class Users {
         // To be removed when component activation will work.
         this.loading = false;
       });
+  }
+  getMoreUsers(): Promise<any> {
+      return this.usersService.getMoreUsers();
   }
   // --------------------------------
   // Not supported by ng2 router yet.

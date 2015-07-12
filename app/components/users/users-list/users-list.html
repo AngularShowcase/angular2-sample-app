@@ -1,7 +1,7 @@
 <ul class="users-list" set-active>
   <li *ng-for="#user of users">
     <!-- Component loading works but browser Location is not updated -->
-    <a href="" [router-link]="['./user-details', { username: user.username }]">
+    <a [router-link]="['./user-details', { username: user.username }]">
       <img src="{{ user.picture.medium }}" alt="{{ user.username }} is picture" />
       {{ user.name.last }}, {{ user.name.first }}</a>
   </li>

@@ -3,6 +3,11 @@
 <div *ng-if="loading">Loading users data</div>
 
 <div *ng-if="!loading">
+  <button type="button"
+          loading
+          loading-text="Loading"
+          loading-action="getMoreUsers">Load More Users</button>
+
   <users-list [users]="users"></users-list>
 
   <router-outlet></router-outlet>

@@ -1,7 +1,6 @@
 /// <reference path="../typings/tsd.d.ts" />
-import {Component, View, bootstrap} from 'angular2/angular2';
+import {Component, View, httpInjectables, bootstrap} from 'angular2/angular2';
 import {RouteConfig, routerDirectives, routerInjectables} from 'angular2/router';
-import {httpInjectables} from 'angular2/http';
 
 import {Home} from './components/home/home';
 import {About} from './components/about/about';
