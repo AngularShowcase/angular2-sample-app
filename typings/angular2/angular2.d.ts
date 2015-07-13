@@ -1516,6 +1516,8 @@ declare module ng {
    */
   class Control extends AbstractControl {
 
+     constructor(control: string, validator?: any)
+
      updateValue(value: any, {onlySelf, emitEvent}?: {onlySelf?: boolean, emitEvent?: boolean}): void;
 
      registerOnChange(fn: Function): void;
@@ -1540,6 +1542,8 @@ declare module ng {
    * @exportedAs angular2/forms
    */
   class ControlGroup extends AbstractControl {
+
+     constructor(options: StringMap<string,Control>, optional?: any)
 
      controls: StringMap<string, AbstractControl>;
 

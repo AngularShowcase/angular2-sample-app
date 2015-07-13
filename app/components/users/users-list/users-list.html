@@ -2,7 +2,10 @@
   <li *ng-for="#user of users">
     <!-- Component loading works but browser Location is not updated -->
     <a [router-link]="['./user-details', { username: user.username }]">
-      <img src="{{ user.picture.medium }}" alt="{{ user.username }} is picture" />
+      <img src="{{ user.picture.medium }}" alt="{{ user.username }}'s picture" />
       {{ user.name.last }}, {{ user.name.first }}</a>
+    <div class="actions">
+      <a [router-link]="['./user-edit', { username: user.username }]">edit</a>
+    </div>
   </li>
 </ul>

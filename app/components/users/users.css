@@ -12,6 +12,7 @@ ul.users-list {
 }
 .users-list > li {
   list-style: none;
+  position: relative;
 }
 .users-list > li.active {
   background-color: #cecece;
@@ -22,16 +23,32 @@ ul.users-list {
   padding: 3px 0;
   color: dimgray;
 }
-.users-list > li > a:hover {
+.users-list > li:hover {
   background-color: slategray;
   color: floralwhite;
 }
+.users-list > li:hover > a {
+  color: floralwhite;
+}
+
 .users-list > li > a > img {
   width: 50px;
   height: 50px;
   border-radius: 25px;
   margin: 0 5px 0 5px;
   vertical-align: middle;
+}
+.users-list > li > .actions {
+  display: none;
+  position: absolute;
+  right: 20px;
+  top: 15px;
+}
+.users-list > li > .actions > a {
+  color: floralwhite;
+}
+.users-list > li:hover > .actions {
+  display: block;
 }
 
 .user-details {

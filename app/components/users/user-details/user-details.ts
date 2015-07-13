@@ -11,16 +11,11 @@ import {UsersService, IUser} from '../services/users-service';
 })
 export class UserDetails {
   user: IUser;
-  constructor(
-    private usersService: UsersService,
-    @Inject(RouteParams) routeParams
-  ) {
+  constructor(@Inject(RouteParams) routeParams,
+              private usersService: UsersService) {
     let username = routeParams.params.username;
-    if (username) {
-      let selectedUser;
-      this.usersService
-        .getUser(username)
-        .then(user => this.user = user);
-    }
+    usersService
+      .getUser(username)
+      .then(user => this.user = user);
   }
 }

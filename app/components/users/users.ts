@@ -9,6 +9,7 @@ import {RouteConfig, routerDirectives} from 'angular2/router';
 import {UsersList} from './users-list/users-list';
 import {UsersHome} from './users-home/users-home';
 import {UserDetails} from './user-details/user-details';
+import {UserForm} from './user-form/user-form';
 import {UsersService} from './services/users-service';
 
 import {LoadingButton} from '../../directives/loading-button';
@@ -19,7 +20,9 @@ import {LoadingButton} from '../../directives/loading-button';
 @RouteConfig([
   { path: '/', redirectTo: '/home' },
   { path: '/home', component: UsersHome, as: 'users-home' },
-  { path: '/show/:username', component: UserDetails, as: 'user-details' }
+  { path: '/show/:username', component: UserDetails, as: 'user-details' },
+  { path: '/edit/:username', component: UserForm, as: 'user-edit' },
+  { path: '/create', component: UserForm, as: 'user-create' }
 ])
 @View({
   templateUrl: './components/users/users.html?v=<%= VERSION %>',
@@ -44,11 +47,12 @@ export class Users {
   // --------------------------------
   // Not supported by ng2 router yet.
   canActivate() {
+    console.info('Component router canActivate now works!');
     this.loading = true;
     this.usersService.getUsers();
   }
   activate() {
-    console.info('Component router activation works now !');
+    console.info('Component router activate now works!');
     this.loading = false;
   }
 }

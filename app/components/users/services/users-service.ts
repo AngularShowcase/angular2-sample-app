@@ -1,35 +1,46 @@
 import {Inject, Http} from 'angular2/angular2';
 import {IUser} from './interfaces';
 
+const SEED_URL = 'http://api.randomuser.me/?results=10&seed=885ad8c4404e07ea03';
+const URL = 'http://api.randomuser.me/?results=10';
+
 export {IUser} from './interfaces';
 export class UsersService {
-  private _initialUsersURL = 'http://api.randomuser.me/?results=10&seed=885ad8c4404e07ea03';
-  private _usersURL = 'http://api.randomuser.me/?results=10';
-  loadUsers = this._loadUsers(this._initialUsersURL);
+  // Fetch only once and cache the initial collection.
+  loadUsers = this.fetch(SEED_URL);
   usersCache = <Array<IUser>>[];
-  selectedUser: IUser;
+  currentUser: IUser;
   constructor(@Inject(Http) private http: Http) {}
   getUsers(): Promise<Array<IUser>> {
     return this.loadUsers;
   }
   getMoreUsers(): Promise<Array<IUser>> {
-    return this._loadUsers(this._usersURL);
+    return this.fetch(URL);
   }
   getUser(username): Promise<IUser> {
     return this.findUserByUsername(username)
       .then(user => {
-        this.selectedUser = user;
-        return this.selectedUser;
+        this.currentUser = user;
+        return this.currentUser;
       });
   }
-  private _loadUsers(url: string): Promise<Array<IUser>> {
+  saveUser(user: IUser) {
+    this.usersCache.push(user);
+    this.sort();
+  }
+  sort() {
+    this.usersCache.sort((a,b) => a.name.last > b.name.last? 1 : -1);
+  }
+  private fetch(url: string): Promise<Array<IUser>> {
     return new Promise((resolve, reject) => {
       this.http.get(url)
         .toRx()
+        // Cleanup what is received from the API.
         .map(res => res.json().results)
         .map(res => res.map(o => o.user))
         .subscribe(res => {
           res.forEach(user => this.usersCache.push(user));
+          this.sort();
           resolve(this.usersCache);
         });
     });

@@ -8,6 +8,8 @@
           loading-text="Loading"
           loading-action="getMoreUsers">Load More Users</button>
 
+  <a [router-link]="['./user-create']">Create user</a>
+
   <users-list [users]="users"></users-list>
 
   <router-outlet></router-outlet>
