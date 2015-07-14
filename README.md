@@ -12,6 +12,7 @@ Sample application based upon [mgechev](https://github.com/mgechev)/ [angular2-s
 * Custom Directive
 * Router module (implementing child routes*)
 * Http module
+* Form module (using template driven form approach)
 
 ~~*Child routes issue: component gets loaded but browser location does not update*~~
 
