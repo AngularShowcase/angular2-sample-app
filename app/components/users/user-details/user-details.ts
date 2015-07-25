@@ -1,5 +1,5 @@
 import {Component, View, Inject, NgIf} from 'angular2/angular2';
-import {RouteParams} from 'angular2/router';
+import {RouteParams, RouterLink} from 'angular2/router';
 import {UsersService, IUser} from '../services/users-service';
 
 @Component({
@@ -7,7 +7,7 @@ import {UsersService, IUser} from '../services/users-service';
 })
 @View({
   templateUrl: './components/users/user-details/user-details.html?v=<%= VERSION %>',
-  directives: [NgIf]
+  directives: [NgIf, RouterLink]
 })
 export class UserDetails {
   user: IUser;
