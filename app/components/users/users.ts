@@ -30,19 +30,17 @@ import {LoadingButton} from '../../directives/loading-button';
   directives: [routerDirectives, NgIf, UsersList, LoadingButton]
 })
 export class Users {
-  users: Array<any>;
   loading = true;
-  constructor(private usersService: UsersService) {
-    usersService
+  constructor(public usersService: UsersService) {
+    this.usersService
       .getUsers()
       .then(users => {
-        this.users = users;
         // To be removed when component activation will work.
         this.loading = false;
       });
   }
-  getMoreUsers(): Promise<any> {
-      return this.usersService.getMoreUsers();
+  eventHandler(value: any) {
+    console.log(`Example of handling custom events: ${value}`);
   }
   // --------------------------------
   // Not supported by ng2 router yet.
