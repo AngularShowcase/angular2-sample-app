@@ -9,12 +9,14 @@ export class UsersService {
   // Fetch only once and cache the initial collection.
   loadUsers = this.fetch(SEED_URL);
   usersCache = <Array<IUser>>[];
+  loading = false;
   currentUser: IUser;
   constructor(@Inject(Http) private http: Http) {}
   getUsers(): Promise<Array<IUser>> {
     return this.loadUsers;
   }
   getMoreUsers(): Promise<Array<IUser>> {
+    this.loading = true;
     return this.fetch(URL);
   }
   getUser(username): Promise<IUser> {
@@ -41,6 +43,7 @@ export class UsersService {
         .subscribe(res => {
           res.forEach(user => this.usersCache.push(user));
           this.sort();
+          this.loading = false;
           resolve(this.usersCache);
         });
     });
