@@ -18,5 +18,8 @@
     <p>
       <img src="{{ user.picture.medium }}" alt="" />
     </p>
+    <p>
+      <a [router-link]="['../user-edit', { username: user.username }]"]>Edit</a>
+    </p>
   </div>
 </div>
