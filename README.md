@@ -46,9 +46,11 @@ vim gulpfile.js
 ```
 Add reference to the installed library in `PATH.src.lib`.
 
-# Contribution
+# Contributors
 
-Any contribution is very much welcome.
+[<img alt="ludohenin" src="https://avatars.githubusercontent.com/u/1011516?v=3&s=117" width="117">](https://github.com/ludohenin) |[<img alt="NathanWalker" src="https://avatars.githubusercontent.com/u/457187?v=3&s=117" width="117">](https://github.com/NathanWalker) |
+:---: |:---: |:---: |:---: |:---: |:---: |
+[ludohenin](https://github.com/ludohenin) |[NathanWalker](https://github.com/NathanWalker) |
 
 # Change Log
 
