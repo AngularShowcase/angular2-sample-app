@@ -3,12 +3,6 @@
 
   <div *ng-if="user">
     <h1>User Details</h1>
-    <!-- router-link directive does not work on child accessed
-         through a router-outlet but does on regular child components.
-     -->
-    <!-- <p>
-      <a [router-link]="['./user-edit', { username: user.username }]">Edit</a>
-    </p> -->
     <p>
       Firstname: {{ user.name.first }}
     </p>
