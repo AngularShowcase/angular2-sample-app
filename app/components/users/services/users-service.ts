@@ -1,4 +1,5 @@
-import {Inject, Http} from 'angular2/angular2';
+import {Inject} from 'angular2/angular2';
+import {Http} from 'http/http';
 import {IUser} from './interfaces';
 
 const SEED_URL = 'http://api.randomuser.me/?results=10&seed=885ad8c4404e07ea03';

@@ -19,22 +19,52 @@ Sample application based upon [mgechev](https://github.com/mgechev)/ [angular2-s
 # How to start
 
 ```bash
-git clone https://github.com/AngularShowcase/angular2-sample-app.git
-cd angular2-sample-app
-npm install
+git clone https://github.com/mgechev/angular2-seed.git
+cd angular2-seed
 # If you don't have gulp already installed
 npm install -g gulp
+npm install
 # dev
 gulp serve.dev
-# prod
-gulp serve.prod
+# test
+gulp test
+```
+
+# Directory Structure
+
+```
+.
+├── app
+│   ├── components
+│   │   ├── about
+│   │   │   ├── about.html
+│   │   │   └── about.ts
+│   │   └── home
+│   │       ├── home.html
+│   │       └── home.ts
+│   ├── services
+│   ├── typings
+│   ├── app.css
+│   ├── app.html
+│   ├── app.ts
+│   ├── index.html
+│   └── init.ts
+├── dist
+│   ├── dev
+│   └── prod
+├── tsd_typings
+├── gulpfile.js
+├── karma.conf.js
+├── package.json
+├── test-main.js
+├── tsconfig.json
+└── tsd.json
 ```
 
 # Configuration
 
 Configure your app base if you serve the app from another directory than root in `gulpfile.js`.
 Defaults to `var APP_BASE = '/'`
-
 
 # Now to extend?
 

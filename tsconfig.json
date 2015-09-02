@@ -1,5 +1,5 @@
 {
-    "version": "1.5.0",
+    "version": "1.5.3",
     "compilerOptions": {
         "target": "es5",
         "module": "commonjs",
@@ -14,7 +14,9 @@
     "files": [
         "./app/app.ts",
         "./app/components/about/about.ts",
+        "./app/components/about/about_spec.ts",
         "./app/components/home/home.ts",
+        "./app/components/home/home_spec.ts",
         "./app/components/users/services/interfaces.ts",
         "./app/components/users/services/users-service.ts",
         "./app/components/users/user-details/user-details.ts",
@@ -26,32 +28,17 @@
         "./app/directives/set-active.ts",
         "./app/init.ts",
         "./app/services/NameList.ts",
+        "./app/services/NameList_spec.ts",
         "./app/typings/_custom.d.ts",
+        "./app/typings/ng2_test.d.ts",
         "./app/typings/systemjs.d.ts",
-        "./tsd_typings/angular2/angular2.d.ts",
-        "./tsd_typings/angular2/router.d.ts",
-        "./tsd_typings/es6-promise/es6-promise.d.ts",
-        "./tsd_typings/rx/rx-lite.d.ts",
-        "./tsd_typings/rx/rx.d.ts",
+        "./tsd_typings/jasmine/jasmine.d.ts",
+        "./tsd_typings/systemjs/systemjs.d.ts",
         "./tsd_typings/tsd.d.ts"
     ],
     "filesGlob": [
         "./app/**/*.ts",
-        "./tsd_typings/**/*.ts"
+        "./tsd_typings/**/*.d.ts"
     ],
-    "compileOnSave": false,
-    "formatCodeOptions": {
-        "indentSize": 2,
-        "tabSize": 2,
-        "newLineCharacter": "\r\n",
-        "convertTabsToSpaces": true,
-        "insertSpaceAfterCommaDelimiter": true,
-        "insertSpaceAfterSemicolonInForStatements": true,
-        "insertSpaceBeforeAndAfterBinaryOperators": true,
-        "insertSpaceAfterKeywordsInControlFlowStatements": true,
-        "insertSpaceAfterFunctionKeywordForAnonymousFunctions": true,
-        "insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
-        "placeOpenBraceOnNewLineForFunctions": false,
-        "placeOpenBraceOnNewLineForControlBlocks": false
-    }
+    "compileOnSave": false
 }

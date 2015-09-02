@@ -1,4 +1,4 @@
-import {Component, View, NgIf, Inject, formDirectives} from 'angular2/angular2';
+import {Component, View, NgIf, Inject, FORM_DIRECTIVES} from 'angular2/angular2';
 import {RouteParams} from 'angular2/router';
 import {UsersService, IUser} from '../services/users-service';
 
@@ -7,11 +7,11 @@ import {UsersService, IUser} from '../services/users-service';
 })
 @View({
   templateUrl: './components/users/user-form/user-form.html?v=<%= VERSION %>',
-  directives: [NgIf, formDirectives]
+  directives: [NgIf, FORM_DIRECTIVES]
 })
 export class UserForm {
   user: IUser;
-  username: string = this.routeParams.params.username
+  username: string = this.routeParams.params ? this.routeParams.params.username : undefined;
   constructor(@Inject(RouteParams) private routeParams,
               private usersService: UsersService) {
     if (this.username) {

@@ -26,8 +26,13 @@ node_modules
 
 # Users Environment Variables
 .lock-wscript
+.tsdrc
+
+#IntelliJ configuration files
+.idea
 
 dist
 dev
 lib
-.DS_Store
+test
+tsd_typings

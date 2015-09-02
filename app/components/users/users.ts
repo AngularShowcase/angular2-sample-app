@@ -4,7 +4,7 @@ export {UsersHome} from './users-home/users-home';
 export {UserDetails} from './user-details/user-details';
 
 import {Component, View, NgIf} from 'angular2/angular2';
-import {RouteConfig, routerDirectives} from 'angular2/router';
+import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {UsersList} from './users-list/users-list';
 import {UsersHome} from './users-home/users-home';
@@ -27,7 +27,7 @@ import {LoadingButton} from '../../directives/loading-button';
 @View({
   templateUrl: './components/users/users.html?v=<%= VERSION %>',
   styleUrls: ['./components/users/users.css'],
-  directives: [routerDirectives, NgIf, UsersList, LoadingButton]
+  directives: [ROUTER_DIRECTIVES, NgIf, UsersList, LoadingButton]
 })
 export class Users {
   loading = true;
