@@ -1,4 +1,4 @@
-import {Component, View, httpInjectables, bootstrap} from 'angular2/angular2';
+import {Component, View, bootstrap} from 'angular2/angular2';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_BINDINGS} from 'angular2/router';
 import {HTTP_BINDINGS} from 'http/http';
 
