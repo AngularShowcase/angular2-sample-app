@@ -2,7 +2,7 @@
 
 <!-- Wait for user when defered -->
 <div *ng-if="user">
-  <form novalidate (ng-submit)="onSave(f.value)" #f="form">
+  <form novalidate (submit)="onSave(f.value)" #f="form">
     <div ng-control-group="name">
       <p>
         <label>Firstname</label>

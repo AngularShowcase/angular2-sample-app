@@ -1,19 +1,26 @@
-import {Component, View, NgFor} from 'angular2/angular2';
+import {Component, CORE_DIRECTIVES} from 'angular2/angular2';
 
-import {NamesList} from '../../services/NameList';
+import {NameList} from '../../services/name_list';
 
 @Component({
-  selector: 'about'
-})
-@View({
-  templateUrl: './components/about/about.html?v=<%= VERSION %>',
-  directives: [NgFor]
+  selector: 'about',
+  styles: [
+    `
+      ul li a {
+        color:blue;
+        cursor:pointer;
+      }
+    `
+  ],
+  templateUrl: './components/about/about.html',
+  directives: [CORE_DIRECTIVES]
 })
 export class About {
-  constructor(public list: NamesList) {
-  }
-  addName(newname) {
+  constructor(public list: NameList) {}
+  addName(newname): boolean {
     this.list.add(newname.value);
     newname.value = '';
+    // prevent default form submit behavior to refresh the page
+    return false;
   }
 }

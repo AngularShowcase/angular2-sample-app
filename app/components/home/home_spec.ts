@@ -1,19 +1,13 @@
 import {
   AsyncTestCompleter,
   TestComponentBuilder,
-  By,
-  beforeEach,
-  ddescribe,
   describe,
-  el,
   expect,
-  iit,
   inject,
   it,
-  xit,
-} from 'angular2/test';
+} from 'angular2/test_lib';
 import {Component, View} from 'angular2/angular2';
-import {DOM} from 'angular2/src/dom/dom_adapter';
+import {DOM} from 'angular2/src/core/dom/dom_adapter';
 import {Home} from './home';
 
 export function main() {
@@ -23,7 +17,7 @@ export function main() {
         tcb.overrideTemplate(TestComponent, '<div><home></home></div>')
           .createAsync(TestComponent)
           .then((rootTC) => {
-            var homeDOMEl = rootTC.componentViewChildren[0].nativeElement;
+            let homeDOMEl = rootTC.debugElement.componentViewChildren[0].nativeElement;
 
             expect(DOM.querySelectorAll(homeDOMEl, 'h1')[0].textContent).toEqual('Howdy!');
 
@@ -31,7 +25,7 @@ export function main() {
           });
       }));
   });
-};
+}
 
 @Component({selector: 'test-cmp'})
 @View({directives: [Home]})

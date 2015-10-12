@@ -10,10 +10,10 @@
       Lastname: {{ user.name.last }}
     </p>
     <p>
-      <img src="{{ user.picture.medium }}" alt="" />
+      <img [src]="user.picture.medium" alt="" />
     </p>
     <p>
-      <a [router-link]="['../user-edit', { username: user.username }]"]>Edit</a>
+      <a [router-link]="['../User-edit', { username: user.username }]">Edit</a>
     </p>
   </div>
 </div>

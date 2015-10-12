@@ -6,7 +6,7 @@ import {
   QueryList,
   Query
 } from 'angular2/angular2';
-import {Router, Location} from 'angular2/router';
+import {Location} from 'angular2/router';
 
 /**
  * Simple directive to add class active on a LI element when
@@ -44,6 +44,7 @@ class ListItem {
               private _elRef: ElementRef,
               private _renderer: Renderer) {}
   toggleClass() {
+    console.log(this.linkHref);
     if (this.linkHref === this.location.path()) {
       this._renderer.setElementClass(this._elRef, this.className, true);
     } else {
@@ -55,16 +56,21 @@ class ListItem {
   }
 }
 
-@Directive({ selector: '[set-active]', host: { '(^click)': 'setActive()' } })
+@Directive({ selector: '[set-active]', host: { '(click)': 'setActive()' } })
 class List {
   _href;
   constructor(@Query(ListItem) private _items: QueryList<ListItem>) {
     // _items is populated later on as it's refers to child classes.
     // So we wait for changes.
-    this._items.onChange(() => this.setActive());
+    // TODO: Figure out the changes needed here to make this work again
+    this._items.changes.observer(_ => {
+      this.setActive();
+    });
   }
   setActive(): void {
-    this._items._results.forEach(item => item.toggleClass())
+    this._items.map(item => {
+      item.toggleClass();
+    });
   }
 }
 
