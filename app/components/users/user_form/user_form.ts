@@ -1,21 +1,19 @@
-import {Component, View, NgIf, Inject, FORM_DIRECTIVES} from 'angular2/angular2';
+import {Component, NgIf, Inject, FORM_DIRECTIVES} from 'angular2/angular2';
 import {RouteParams} from 'angular2/router';
-import {UsersService, IUser} from '../services/users-service';
+import {UserService, IUser} from '../services/user_service';
 
 @Component({
-  selector: 'user-form'
-})
-@View({
-  templateUrl: './components/users/user-form/user-form.html?v=<%= VERSION %>',
+  selector: 'user-form',
+  templateUrl: './components/users/user_form/user_form.html',
   directives: [NgIf, FORM_DIRECTIVES]
 })
 export class UserForm {
   user: IUser;
   username: string = this.routeParams.params ? this.routeParams.params.username : undefined;
   constructor(@Inject(RouteParams) private routeParams,
-              private usersService: UsersService) {
+              private userService: UserService) {
     if (this.username) {
-      usersService.getUser(this.username)
+      userService.getUser(this.username)
         .then(user => this.user = user);
     } else {
       // TODO: add User model
@@ -32,6 +30,7 @@ export class UserForm {
     // ng2 does not fail silently when a property isn't
     // defined on a binding.
     model.picture = {};
-    this.usersService.saveUser(model);
+    this.userService.saveUser(model);
+    return false;
   }
 }

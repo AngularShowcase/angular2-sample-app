@@ -1,55 +1,49 @@
 import {
   AsyncTestCompleter,
   TestComponentBuilder,
-  By,
-  beforeEach,
-  ddescribe,
   describe,
-  el,
   expect,
-  iit,
   inject,
-  it,
-  xit,
-} from 'angular2/test';
+  it
+} from 'angular2/test_lib';
 import {Component, View} from 'angular2/angular2';
-import {DOM} from 'angular2/src/dom/dom_adapter';
+import {DOM} from 'angular2/src/core/dom/dom_adapter';
 import {About} from './about';
-import {NamesList} from '../../services/NameList';
+import {NameList} from '../../services/name_list';
 
 export function main() {
   describe('About component', () => {
     it('should work',
-       inject([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
-         tcb.overrideTemplate(TestComponent, '<div><about></about></div>')
-           .createAsync(TestComponent)
-           .then((rootTC) => {
-             rootTC.detectChanges();
+      inject([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
+        tcb.overrideTemplate(TestComponent, '<div><about></about></div>')
+          .createAsync(TestComponent)
+          .then((rootTC) => {
+            rootTC.detectChanges();
 
-             var aboutInstance = rootTC.componentViewChildren[0].componentInstance;
-             var aboutDOMEl = rootTC.componentViewChildren[0].nativeElement;
-             var nameListLen = function () {
-               return aboutInstance.list.names.length;
-             }
+            let aboutInstance = rootTC.debugElement.componentViewChildren[0].componentInstance;
+            let aboutDOMEl = rootTC.debugElement.componentViewChildren[0].nativeElement;
+            let nameListLen = function () {
+              return aboutInstance.list.names.length;
+            };
 
-             expect(aboutInstance.list).toEqual(jasmine.any(NamesList));
-             expect(nameListLen()).toEqual(4);
-             expect(DOM.querySelectorAll(aboutDOMEl, 'li').length).toEqual(nameListLen());
+            expect(aboutInstance.list).toEqual(jasmine.any(NameList));
+            expect(nameListLen()).toEqual(4);
+            expect(DOM.querySelectorAll(aboutDOMEl, 'li').length).toEqual(nameListLen());
 
-             aboutInstance.addName({value: 'Minko'});
-             rootTC.detectChanges();
+            aboutInstance.addName({value: 'Minko'});
+            rootTC.detectChanges();
 
-             expect(nameListLen()).toEqual(5);
-             expect(DOM.querySelectorAll(aboutDOMEl, 'li').length).toEqual(nameListLen());
+            expect(nameListLen()).toEqual(5);
+            expect(DOM.querySelectorAll(aboutDOMEl, 'li').length).toEqual(nameListLen());
 
-             expect(DOM.querySelectorAll(aboutDOMEl, 'li')[4].textContent).toEqual('Minko');
+            expect(DOM.querySelectorAll(aboutDOMEl, 'li')[4].textContent).toEqual('Minko');
 
-             async.done();
-           });
-       }));
+            async.done();
+          });
+      }));
   });
-};
+}
 
-@Component({selector: 'test-cmp', bindings: [NamesList]})
+@Component({bindings: [NameList], selector: 'test-cmp'})
 @View({directives: [About]})
 class TestComponent {}

@@ -1,4 +1,4 @@
-import {Directive, Component, View, ElementRef, EventEmitter} from 'angular2/angular2';
+import {Directive, ElementRef, EventEmitter} from 'angular2/angular2';
 /**
  * Simple directive to display an action message (via [loading-text] property) in a button when clicked.
  * The button is then disabled until the action is completed.
@@ -16,24 +16,26 @@ import {Directive, Component, View, ElementRef, EventEmitter} from 'angular2/ang
  *  </button>
  */
 @Directive({
-  selector: 'button[loading]',
+  selector: 'button[loading-btn]',
   properties: [
-    'text: loadingText', 
+    'text: loadingText',
     'loading: loadingMore'
   ],
   events: [
     'sampleCustomEvent'
   ],
-  host: { 
+  host: {
     '[disabled]': '_loading'
   }
 })
-export class LoadingButton {
+export class LoadingBtn {
+  public _loading = false;
   private _text: string;
-  private _originalText = this._elRef.nativeElement.innerHTML;
-  private _loading = false;
+  private _originalText: string;
   private sampleCustomEvent = new EventEmitter();
-  constructor(private _elRef: ElementRef) {}
+  constructor(private _elRef: ElementRef) {
+    this._originalText = this._elRef.nativeElement.innerHTML;
+  }
   toggleText(): void {
     if (this._loading) {
       this._elRef.nativeElement.innerHTML = this._text;

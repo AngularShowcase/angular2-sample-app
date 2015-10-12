@@ -4,15 +4,15 @@
 
 <div *ng-if="!loading">
   <button type="button"
-          loading
-          [loading-text]="'Loading more...'"
-          [loading-more]="usersService.loading"
-          (sample-custom-event)="eventHandler($event)"
-          (click)="usersService.getMoreUsers()">Load More Users</button>
+    loading-btn
+    [loading-text]="'Loading more...'"
+    [loading-more]="userService.loading"
+    (sample-custom-event)="eventHandler($event)"
+    (click)="userService.getMoreUsers()">Load More Users</button>
 
-  <a [router-link]="['./user-create']">Create user</a>
+  <a [router-link]="['./User-create']">Create user</a>
 
-  <users-list [users]="usersService.usersCache"></users-list>
+  <users-list [users]="userService.usersCache"></users-list>
 
   <router-outlet></router-outlet>
 </div>

@@ -1,38 +1,32 @@
-export {UsersService, IUser} from './services/users-service';
-export {UsersList} from './users-list/users-list';
-export {UsersHome} from './users-home/users-home';
-export {UserDetails} from './user-details/user-details';
-
-import {Component, View, NgIf} from 'angular2/angular2';
+import {Component, NgIf, ViewEncapsulation} from 'angular2/angular2';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 
-import {UsersList} from './users-list/users-list';
-import {UsersHome} from './users-home/users-home';
-import {UserDetails} from './user-details/user-details';
-import {UserForm} from './user-form/user-form';
-import {UsersService} from './services/users-service';
+import {UsersList} from './users_list/users_list';
+import {UsersHome} from './users_home/users_home';
+import {UserDetails} from './user_details/user_details';
+import {UserForm} from './user_form/user_form';
+import {UserService} from './services/user_service';
 
-import {LoadingButton} from '../../directives/loading-button';
+import {LoadingBtn} from '../../directives/loading_btn';
 
 @Component({
-  selector: 'users'
+  selector: 'users',
+  templateUrl: './components/users/users.html',
+  styleUrls: ['./components/users/users.css'],
+  encapsulation: ViewEncapsulation.None,
+  directives: [ROUTER_DIRECTIVES, NgIf, UsersList, LoadingBtn]
 })
 @RouteConfig([
   { path: '/', redirectTo: '/home' },
-  { path: '/home', component: UsersHome, as: 'users-home' },
-  { path: '/show/:username', component: UserDetails, as: 'user-details' },
-  { path: '/edit/:username', component: UserForm, as: 'user-edit' },
-  { path: '/create', component: UserForm, as: 'user-create' }
+  { path: '/home', component: UsersHome, as: 'Users-home' },
+  { path: '/show/:username', component: UserDetails, as: 'User-details' },
+  { path: '/edit/:username', component: UserForm, as: 'User-edit' },
+  { path: '/create', component: UserForm, as: 'User-create' }
 ])
-@View({
-  templateUrl: './components/users/users.html?v=<%= VERSION %>',
-  styleUrls: ['./components/users/users.css'],
-  directives: [ROUTER_DIRECTIVES, NgIf, UsersList, LoadingButton]
-})
 export class Users {
-  loading = true;
-  constructor(public usersService: UsersService) {
-    this.usersService
+  public loading:boolean = true;
+  constructor(public userService: UserService) {
+    this.userService
       .getUsers()
       .then(users => {
         // To be removed when component activation will work.
@@ -47,7 +41,7 @@ export class Users {
   canActivate() {
     console.info('Component router canActivate now works!');
     this.loading = true;
-    this.usersService.getUsers();
+    this.userService.getUsers();
   }
   activate() {
     console.info('Component router activate now works!');

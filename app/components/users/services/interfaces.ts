@@ -9,13 +9,13 @@ export interface IUser {
     region: string;
     street: string;
     zip: string;
-  }
+  };
   md5: string;
   name: {
     title: string;
     first: string;
     last: string;
-  }
+  };
   nationality: string;
   password: string;
   phone: string;
@@ -23,7 +23,7 @@ export interface IUser {
     large: string;
     medium: string;
     thumbnail: string;
-  }
+  };
   registered: string;
   salt: string;
   sha1: string;

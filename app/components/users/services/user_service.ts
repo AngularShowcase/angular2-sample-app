@@ -1,12 +1,12 @@
 import {Inject} from 'angular2/angular2';
-import {Http} from 'http/http';
+import {Http} from 'angular2/http';
 import {IUser} from './interfaces';
 
 const SEED_URL = 'http://api.randomuser.me/?results=10&seed=885ad8c4404e07ea03';
 const URL = 'http://api.randomuser.me/?results=10';
 
 export {IUser} from './interfaces';
-export class UsersService {
+export class UserService {
   // Fetch only once and cache the initial collection.
   loadUsers = this.fetch(SEED_URL);
   usersCache = <Array<IUser>>[];
@@ -37,7 +37,7 @@ export class UsersService {
   private fetch(url: string): Promise<Array<IUser>> {
     return new Promise((resolve, reject) => {
       this.http.get(url)
-        .toRx()
+        // .toRx()
         // Cleanup what is received from the API.
         .map(res => res.json().results)
         .map(res => res.map(o => o.user))

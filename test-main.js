@@ -1,4 +1,4 @@
-// Tun on full stack traces in errors to help debugging
+// Turn on full stack traces in errors to help debugging
 Error.stackTraceLimit=Infinity;
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 100;
@@ -12,11 +12,11 @@ System.config({
   defaultJSExtensions: true,
   paths: {
     'angular2/*': 'node_modules/angular2/*.js',
-    'rx': 'node_modules/angular2/node_modules/rx/dist/rx.js'
+    '@reactivex/rxjs/*': 'node_modules/@reactivex/rxjs/*.js',
   }
 });
 
-System.import('angular2/src/dom/browser_adapter').then(function(browser_adapter) {
+System.import('angular2/src/core/dom/browser_adapter').then(function(browser_adapter) {
   browser_adapter.BrowserDomAdapter.makeCurrent();
 }).then(function() {
   return Promise.all(
@@ -31,7 +31,7 @@ System.import('angular2/src/dom/browser_adapter').then(function(browser_adapter)
           throw new Error('Module ' + path + ' does not implement main() method.');
         }
       });
-    }))
+    }));
 })
 .then(function() {
   __karma__.start();

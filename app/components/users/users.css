@@ -13,6 +13,7 @@ ul.users-list {
 .users-list > li {
   list-style: none;
   position: relative;
+  font-size: 14px;
 }
 .users-list > li.active {
   background-color: #cecece;
