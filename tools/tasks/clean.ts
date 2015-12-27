@@ -1,16 +1,15 @@
 import * as async from 'async';
 import * as del from 'del';
-import {join} from 'path';
-import {PATH} from '../workflow.config';
+import {APP_DEST, TEST_DEST, TMP_DIR} from '../config';
 
-export = function (gulp, plugins, option) {
+export = function clean(gulp, plugins, option) {
   return function (done) {
 
     switch(option) {
-      case 'clean'        : cleanAll(done);     break;
-      case 'clean.dist'   : cleanDist(done);    break;
-      case 'clean.app.dev': cleanAppDev(done);  break;
-      case 'test'         : cleanTest(done);    break;
+      case 'all'    : cleanAll(done);     break;
+      case 'dist'   : cleanDist(done);    break;
+      case 'test'   : cleanTest(done);    break;
+      case 'tmp'    : cleanTmp(done);     break;
       default: done();
     }
 
@@ -19,20 +18,17 @@ export = function (gulp, plugins, option) {
 
 function cleanAll(done) {
   async.parallel([
-    cb => cleanDist(cb),
-    cb => cleanTest(cb)
+    cleanDist,
+    cleanTest,
+    cleanTmp
   ], done);
 }
 function cleanDist(done) {
-  del(PATH.dest.all, done);
-}
-function cleanAppDev(done) {
-  del([
-    join(PATH.dest.dev.all, '**/*'),
-    '!' + PATH.dest.dev.lib,
-    '!' + join(PATH.dest.dev.lib, '*')
-  ], done);
+  del(APP_DEST, done);
 }
 function cleanTest(done) {
-  del(PATH.dest.test, done);
+  del(TEST_DEST, done);
+}
+function cleanTmp(done) {
+  del(TMP_DIR, done);
 }

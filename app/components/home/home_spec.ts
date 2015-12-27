@@ -5,8 +5,8 @@ import {
   expect,
   inject,
   it,
-} from 'angular2/test_lib';
-import {Component, View} from 'angular2/angular2';
+} from 'angular2/testing';
+import {Component, View} from 'angular2/core';
 import {DOM} from 'angular2/src/core/dom/dom_adapter';
 import {Home} from './home';
 

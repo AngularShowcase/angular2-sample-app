@@ -12,11 +12,11 @@ System.config({
   defaultJSExtensions: true,
   paths: {
     'angular2/*': 'node_modules/angular2/*.js',
-    '@reactivex/rxjs/*': 'node_modules/@reactivex/rxjs/*.js',
+    'rxjs/*': 'node_modules/rxjs/*.js'
   }
 });
 
-System.import('angular2/src/core/dom/browser_adapter').then(function(browser_adapter) {
+System.import('angular2/src/platform/browser/browser_adapter').then(function(browser_adapter) {
   browser_adapter.BrowserDomAdapter.makeCurrent();
 }).then(function() {
   return Promise.all(
@@ -42,13 +42,12 @@ System.import('angular2/src/core/dom/browser_adapter').then(function(browser_ada
 
 
 function onlySpecFiles(path) {
-  return /_spec\.js$/.test(path);
+  return /[\.|_]spec\.js$/.test(path);
 }
 
 // Normalize paths to module names.
 function file2moduleName(filePath) {
-  var name = filePath.replace(/\\/g, '/')
+  return filePath.replace(/\\/g, '/')
     .replace(/^\/base\//, '')
     .replace(/\.js/, '');
-  return name;
 }

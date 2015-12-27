@@ -24,6 +24,10 @@ ul.users-list {
   padding: 3px 0;
   color: dimgray;
 }
+.users-list > li > a.router-link-active {
+  background-color:#28b0ed;
+  color:#fff;
+}
 .users-list > li:hover {
   background-color: slategray;
   color: floralwhite;

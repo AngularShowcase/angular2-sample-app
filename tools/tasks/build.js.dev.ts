@@ -1,24 +1,25 @@
 import {join} from 'path';
-import {templateLocals, tsProject} from '../utils';
-import {PATH, APP_SRC} from '../workflow.config';
+import {APP_SRC, APP_DEST} from '../config';
+import {templateLocals, tsProjectFn} from '../utils';
 
-export = function (gulp, plugins) {
+export = function buildJSDev(gulp, plugins) {
+  let tsProject = tsProjectFn(plugins);
   return function () {
-    var config = tsProject(plugins);
+    let src = [
+                join(APP_SRC, '**/*.ts'),
+                '!' + join(APP_SRC, '**/*_spec.ts')
+              ];
 
-    var result = gulp.src(
-      [
-        join(PATH.src.all, '**/*ts'),
-        '!' + join(PATH.src.all, '**/*_spec.ts')
-      ])
+    let result = gulp.src(src)
       .pipe(plugins.plumber())
+      // Won't be required for non-production build after the change
       .pipe(plugins.inlineNg2Template({ base: APP_SRC }))
       .pipe(plugins.sourcemaps.init())
-      .pipe(plugins.typescript(config));
+      .pipe(plugins.typescript(tsProject));
 
     return result.js
       .pipe(plugins.sourcemaps.write())
       .pipe(plugins.template(templateLocals()))
-      .pipe(gulp.dest(PATH.dest.dev.all));
+      .pipe(gulp.dest(APP_DEST));
   };
 };

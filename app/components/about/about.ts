@@ -1,4 +1,4 @@
-import {Component, CORE_DIRECTIVES} from 'angular2/angular2';
+import {Component} from 'angular2/core';
 
 import {NameList} from '../../services/name_list';
 
@@ -12,10 +12,9 @@ import {NameList} from '../../services/name_list';
       }
     `
   ],
-  templateUrl: './components/about/about.html',
-  directives: [CORE_DIRECTIVES]
+  templateUrl: './components/about/about.html'
 })
-export class About {
+export class AboutCmp {
   constructor(public list: NameList) {}
   addName(newname): boolean {
     this.list.add(newname.value);

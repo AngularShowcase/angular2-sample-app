@@ -1,13 +1,12 @@
-import {Component, NgIf, Inject, FORM_DIRECTIVES} from 'angular2/angular2';
+import {Component, Inject} from 'angular2/core';
 import {RouteParams} from 'angular2/router';
 import {UserService, IUser} from '../services/user_service';
 
 @Component({
   selector: 'user-form',
-  templateUrl: './components/users/user_form/user_form.html',
-  directives: [NgIf, FORM_DIRECTIVES]
+  templateUrl: './components/users/user_form/user_form.html'
 })
-export class UserForm {
+export class UserFormCmp {
   user: IUser;
   username: string = this.routeParams.params ? this.routeParams.params.username : undefined;
   constructor(@Inject(RouteParams) private routeParams,

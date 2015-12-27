@@ -5,10 +5,10 @@ import {
   expect,
   inject,
   it
-} from 'angular2/test_lib';
-import {Component, View} from 'angular2/angular2';
+} from 'angular2/testing';
+import {Component, View} from 'angular2/core';
 import {DOM} from 'angular2/src/core/dom/dom_adapter';
-import {About} from './about';
+import {AboutCmp} from './about';
 import {NameList} from '../../services/name_list';
 
 export function main() {
@@ -45,5 +45,5 @@ export function main() {
 }
 
 @Component({bindings: [NameList], selector: 'test-cmp'})
-@View({directives: [About]})
+@View({directives: [AboutCmp]})
 class TestComponent {}

@@ -1,15 +1,16 @@
 import {join} from 'path';
-import {PATH} from '../workflow.config';
+import {APP_SRC, TOOLS_DIR} from '../config';
 
-export = function (gulp, plugins) {
+export = function tslint(gulp, plugins) {
   return function () {
-    return gulp.src(
-      [
-        join(PATH.src.all, '**/*.ts'),
-        join(PATH.src.all, '../tools/**/*.ts'),
-        '!' + join(PATH.src.all, '**/*.d.ts'),
-        '!' + join(PATH.src.all, '../tools/**/*.d.ts')
-      ])
+    let src = [
+                join(APP_SRC, '**/*.ts'),
+                '!' + join(APP_SRC, '**/*.d.ts'),
+                join(TOOLS_DIR, '**/*.ts'),
+                '!' + join(TOOLS_DIR, '**/*.d.ts')
+              ];
+
+    return gulp.src(src)
       .pipe(plugins.tslint())
       .pipe(plugins.tslint.report(plugins.tslintStylish, {
         emitError: false,
