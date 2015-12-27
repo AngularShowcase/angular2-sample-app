@@ -1,21 +1,21 @@
 <h1>User Form</h1>
 
 <!-- Wait for user when defered -->
-<div *ng-if="user">
-  <form novalidate (submit)="onSave(f.value)" #f="form">
-    <div ng-control-group="name">
+<div *ngIf="user">
+  <form novalidate (submit)="onSave(f.value)" #f="ngForm">
+    <div ngControlGroup="name">
       <p>
         <label>Firstname</label>
         <input type="text"
-               ng-control="first"
-               [ng-model]="user.name.first"
+               ngControl="first"
+               [ngModel]="user.name.first"
                required>
       </p>
       <p>
         <label>Lastname</label>
         <input type="text"
-               ng-control="last"
-               [ng-model]="user.name.last"
+               ngControl="last"
+               [ngModel]="user.name.last"
                required>
       </p>
     </div>

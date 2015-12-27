@@ -1,7 +1,7 @@
 <div class="user-details">
-  <div *ng-if="!user">No user found</div>
+  <div *ngIf="!user">No user found</div>
 
-  <div *ng-if="user">
+  <div *ngIf="user">
     <h1>User Details</h1>
     <p>
       Firstname: {{ user.name.first }}
@@ -13,7 +13,7 @@
       <img [src]="user.picture.medium" alt="" />
     </p>
     <p>
-      <a [router-link]="['../User-edit', { username: user.username }]">Edit</a>
+      <a [routerLink]="['../User-edit', { username: user.username }]">Edit</a>
     </p>
   </div>
 </div>

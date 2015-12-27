@@ -1,19 +1,21 @@
-import {tsProject} from '../utils';
-import {PATH, APP_SRC} from '../workflow.config';
+import {join} from 'path';
+import {APP_SRC, TEST_DEST} from '../config';
+import {tsProjectFn} from '../utils';
 
-export = function (gulp, plugins) {
+export = function buildTest(gulp, plugins) {
   return function () {
-    let config = tsProject(plugins);
-    let result = gulp.src(
-      [
-        './app/**/*.ts',
-        '!./app/init.ts'
-      ])
+    let tsProject = tsProjectFn(plugins);
+    let src = [
+                join(APP_SRC, '**/*.ts'),
+                '!' + join(APP_SRC, 'bootstrap.ts')
+              ];
+
+    let result = gulp.src(src)
       .pipe(plugins.plumber())
       .pipe(plugins.inlineNg2Template({ base: APP_SRC }))
-      .pipe(plugins.typescript(config));
+      .pipe(plugins.typescript(tsProject));
 
     return result.js
-      .pipe(gulp.dest(PATH.dest.test));
+      .pipe(gulp.dest(TEST_DEST));
   };
 };

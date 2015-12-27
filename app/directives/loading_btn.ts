@@ -1,4 +1,4 @@
-import {Directive, ElementRef, EventEmitter} from 'angular2/angular2';
+import {Directive, ElementRef, EventEmitter, Output, Input} from 'angular2/core';
 /**
  * Simple directive to display an action message (via [loading-text] property) in a button when clicked.
  * The button is then disabled until the action is completed.
@@ -17,38 +17,27 @@ import {Directive, ElementRef, EventEmitter} from 'angular2/angular2';
  */
 @Directive({
   selector: 'button[loading-btn]',
-  properties: [
-    'text: loadingText',
-    'loading: loadingMore'
-  ],
-  events: [
-    'sampleCustomEvent'
-  ],
   host: {
     '[disabled]': '_loading'
   }
 })
 export class LoadingBtn {
-  public _loading = false;
-  private _text: string;
+  @Input() public loadingText: string = 'Loading...';
+  private _loading: boolean = false;
   private _originalText: string;
-  private sampleCustomEvent = new EventEmitter();
+  @Output() private sampleCustomEvent = new EventEmitter();
   constructor(private _elRef: ElementRef) {
-    this._originalText = this._elRef.nativeElement.innerHTML;
+    this._originalText = this._elRef.nativeElement.innerText;
   }
   toggleText(): void {
     if (this._loading) {
-      this._elRef.nativeElement.innerHTML = this._text;
+      this._elRef.nativeElement.innerText = this.loadingText;
     } else {
-      this._elRef.nativeElement.innerHTML = this._originalText;
+      this._elRef.nativeElement.innerText = this._originalText;
     }
   }
-  set text(v: string) {
-    if (!v) { v = 'default text'; }
-    this._text = v;
-  }
-  set loading(v: boolean) {
-    this.sampleCustomEvent.next(`Button is ${v ? '' : 'not '}loading.`);
+  @Input('loadingMore') set loading(v: boolean) {
+    this.sampleCustomEvent.emit(`Button is ${v ? '' : 'not '}loading.`);
     this._loading = v;
     this.toggleText();
   }

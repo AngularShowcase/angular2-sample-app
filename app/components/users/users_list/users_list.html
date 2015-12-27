@@ -1,11 +1,11 @@
-<ul class="users-list"><!-- TODO: add set-active back here -->
-  <li *ng-for="#user of users">
+<ul class="users-list" set-active><!-- TODO: add set-active back here -->
+  <li *ngFor="#user of users">
     <!-- Component loading works but browser Location is not updated -->
-    <a [router-link]="['./User-details', { username: user.username }]">
+    <a [routerLink]="['./User-details', { username: user.username }]">
       <img [src]="user.picture.medium" alt="{{ user.username }}'s picture" />
       {{ user.name.last }}, {{ user.name.first }}</a>
     <div class="actions">
-      <a [router-link]="['./User-edit', { username: user.username }]">edit</a>
+      <a [routerLink]="['./User-edit', { username: user.username }]">edit</a>
     </div>
   </li>
 </ul>
