@@ -1,9 +1,9 @@
 import {
-  bind,
   Component,
   DynamicComponentLoader,
   ElementRef,
   Injector,
+  provide,
   Type,
   View
 } from 'angular2/core';
@@ -33,7 +33,7 @@ class ComponentProvider {
 export function componentProxyFactory(provider: ComponentProvider): Type {
   @Component({
     selector: 'component-proxy',
-    bindings: [bind(ComponentProvider).toValue(provider)]
+    providers: [provide(ComponentProvider, {useValue: provider})]
   })
   @View({
     template: `<span #content></span>`
