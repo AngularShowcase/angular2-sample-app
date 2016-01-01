@@ -2,10 +2,11 @@ import {Component, ViewEncapsulation} from 'angular2/core';
 import {ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';
 
 import {HomeCmp} from '../home/home';
-import {AboutCmp} from '../about/about';
 import {NameList} from '../../services/name_list';
 import {UsersCmp} from '../users/users';
 import {UserService} from '../users/services/user_service';
+
+import {componentProxyFactory} from '../../services/component_proxy';
 
 @Component({
   selector: 'app',
@@ -17,8 +18,14 @@ import {UserService} from '../users/services/user_service';
 })
 @RouteConfig([
   { path: '/home', component: HomeCmp, as: 'Home', useAsDefault: true },
-  { path: '/about', component: AboutCmp, as: 'About' },
+  {
+    path: '/about',
+    component: componentProxyFactory({
+      path: './components/about/about',
+      provide: m => m.AboutCmp
+    }),
+    as: 'About'
+  },
   { path: '/users/...', component: UsersCmp, as: 'Users' }
 ])
 export class AppCmp {}
-
