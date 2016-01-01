@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-
+import {NgFor} from 'angular2/common';
 import {NameList} from '../../services/name_list';
 
 @Component({
@@ -12,7 +12,8 @@ import {NameList} from '../../services/name_list';
       }
     `
   ],
-  templateUrl: './components/about/about.html'
+  templateUrl: './components/about/about.html',
+  directives: [NgFor]
 })
 export class AboutCmp {
   constructor(public list: NameList) {}
