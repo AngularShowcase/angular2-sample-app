@@ -1,49 +1,45 @@
 import {
-  AsyncTestCompleter,
-  TestComponentBuilder,
   describe,
   expect,
-  inject,
-  it
+  injectAsync,
+  it,
+  TestComponentBuilder
 } from 'angular2/testing';
 import {Component, View} from 'angular2/core';
-import {DOM} from 'angular2/src/core/dom/dom_adapter';
+import {DOM} from 'angular2/src/platform/dom/dom_adapter';
 import {AboutCmp} from './about';
 import {NameList} from '../../services/name_list';
 
 export function main() {
   describe('About component', () => {
-    it('should work',
-      inject([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
-        tcb.overrideTemplate(TestComponent, '<div><about></about></div>')
-          .createAsync(TestComponent)
-          .then((rootTC) => {
-            rootTC.detectChanges();
+    it('should work', injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+      return tcb.overrideTemplate(TestComponent, '<div><about></about></div>')
+        .createAsync(TestComponent)
+        .then((rootTC) => {
+          rootTC.detectChanges();
 
-            let aboutInstance = rootTC.debugElement.componentViewChildren[0].componentInstance;
-            let aboutDOMEl = rootTC.debugElement.componentViewChildren[0].nativeElement;
-            let nameListLen = function () {
-              return aboutInstance.list.names.length;
-            };
+          let aboutInstance = rootTC.debugElement.componentViewChildren[0].componentInstance;
+          let aboutDOMEl = rootTC.debugElement.componentViewChildren[0].nativeElement;
 
-            expect(aboutInstance.list).toEqual(jasmine.any(NameList));
-            expect(nameListLen()).toEqual(4);
-            expect(DOM.querySelectorAll(aboutDOMEl, 'li').length).toEqual(nameListLen());
+          let nameListLen = function () {
+            return aboutInstance.list.names.length;
+          };
 
-            aboutInstance.addName({value: 'Minko'});
-            rootTC.detectChanges();
+          expect(aboutInstance.list).toEqual(jasmine.any(NameList));
+          expect(nameListLen()).toEqual(4);
+          expect(DOM.querySelectorAll(aboutDOMEl, 'li').length).toEqual(nameListLen());
 
-            expect(nameListLen()).toEqual(5);
-            expect(DOM.querySelectorAll(aboutDOMEl, 'li').length).toEqual(nameListLen());
+          aboutInstance.addName({value: 'Minko'});
+          rootTC.detectChanges();
 
-            expect(DOM.querySelectorAll(aboutDOMEl, 'li')[4].textContent).toEqual('Minko');
-
-            async.done();
-          });
-      }));
+          expect(nameListLen()).toEqual(5);
+          expect(DOM.querySelectorAll(aboutDOMEl, 'li').length).toEqual(nameListLen());
+          expect(DOM.querySelectorAll(aboutDOMEl, 'li > span')[4].textContent).toEqual('Minko');
+        });
+    }));
   });
 }
 
-@Component({bindings: [NameList], selector: 'test-cmp'})
+@Component({providers: [NameList], selector: 'test-cmp'})
 @View({directives: [AboutCmp]})
 class TestComponent {}
