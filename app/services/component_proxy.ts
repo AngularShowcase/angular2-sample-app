@@ -1,3 +1,5 @@
+/// <reference path="../../tools/typings/tsd/systemjs/systemjs.d.ts"/>
+
 import {
   Component,
   DynamicComponentLoader,
@@ -7,7 +9,6 @@ import {
   Type,
   View
 } from 'angular2/core';
-
 /**
  * A factory for a <a href="https://en.wikipedia.org/wiki/Proxy_pattern#Possible_Usage_Scenarios">Virtual Proxy</a> Component
  * to provide a lazily loaded `Component` which will be loaded and rendered by the `DynamicComponentLoader` on entering a route when
