@@ -1,5 +1,5 @@
 # WARNING
-
+This is a new line in the readme file. Created only to trigger a build
 This project is no longer maintained. For Angular 2 starter take a look at the [angular2-seed](https://github.com/mgechev/angular2-seed), that this project is based on.
 
 # Introduction
